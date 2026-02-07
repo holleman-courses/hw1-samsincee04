@@ -129,7 +129,7 @@ if __name__ == '__main__':
     best_model = build_model50k()
     ##print(best_model.summary())
     best_model.fit(train_images, train_labels, epochs=10, validation_data=(val_images, val_labels))
-    best_model.save("best_model.h5", save_format="h5")
+    best_model.save("best_model.h5")
 
     
     
