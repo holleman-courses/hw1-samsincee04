@@ -4,8 +4,8 @@ import tensorflow as tf
 import keras
 from keras import layers
 import numpy as np
-import ssl
-import os
+##import ssl
+##import os
 
 # Fix SSL certificate verification issue on macOS
 ##ssl._create_default_https_context = ssl._create_unverified_context
@@ -116,9 +116,11 @@ if __name__ == '__main__':
     # model3 = build_model3()
     # model3.fit(train_images, train_labels, epochs=30, validation_data=(val_images, val_labels))
     
-    #best_model = build_model50k()
-    #best_model.fit(train_images, train_labels, epochs=50, validation_data=(val_images, val_labels))
-    #best_model.save("best_model.h5")
+    ##best_model = build_model50k()
+    #print(best_model.summary())
+    ##best_model.fit(train_images, train_labels, epochs=50, validation_data=(val_images, val_labels))
+    ##best_model.save("best_model.h5")
+    
     
 
 
