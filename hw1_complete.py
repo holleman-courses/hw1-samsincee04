@@ -93,8 +93,15 @@ def build_model50k():
         layers.GlobalAveragePooling2D(),
         layers.Dense(10)
     ])
-    if os.path.exists("best_model.h5"):
-        model.load_weights("best_model.h5")
+   # Dynamic pathing for GitHub Autograder compatibility
+    base_path = os.path.dirname(__file__)
+    weights_path = os.path.join(base_path, "best_model.h5")
+
+    if os.path.exists(weights_path):
+        print(f"DEBUG: Loading weights from {weights_path}")
+        model.load_weights(weights_path)
+    else:
+        print(f"DEBUG: {weights_path} NOT FOUND")
 
     model.compile(
         optimizer='adam',
@@ -119,10 +126,11 @@ if __name__ == '__main__':
     # model3 = build_model3()
     # model3.fit(train_images, train_labels, epochs=30, validation_data=(val_images, val_labels))
     
-    ##best_model = build_model50k()
+    #best_model = build_model50k()
     #print(best_model.summary())
-    ##best_model.fit(train_images, train_labels, epochs=50, validation_data=(val_images, val_labels))
-    ##best_model.save("best_model.h5")
+    #best_model.fit(train_images, train_labels, epochs=50, validation_data=(val_images, val_labels))
+    #best_model.save("best_model.h5")
+
     
     
 
