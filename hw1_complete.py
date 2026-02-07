@@ -5,7 +5,7 @@ import keras
 from keras import layers
 import numpy as np
 ##import ssl
-##import os
+import os
 
 # Fix SSL certificate verification issue on macOS
 ##ssl._create_default_https_context = ssl._create_unverified_context
@@ -93,6 +93,9 @@ def build_model50k():
         layers.GlobalAveragePooling2D(),
         layers.Dense(10)
     ])
+    if os.path.exists("best_model.h5"):
+        model.load_weights("best_model.h5")
+
     model.compile(
         optimizer='adam',
         loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
