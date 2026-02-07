@@ -8,7 +8,7 @@ import ssl
 import os
 
 # Fix SSL certificate verification issue on macOS
-ssl._create_default_https_context = ssl._create_unverified_context
+##ssl._create_default_https_context = ssl._create_unverified_context
 
 def build_model1():
     model = keras.Sequential([
@@ -107,6 +107,18 @@ if __name__ == '__main__':
     val_images, val_labels = train_images[:5000], train_labels[:5000]
     train_images, train_labels = train_images[5000:], train_labels[5000:]
 
+  # model1 = build_model1()
+    # model1.fit(train_images, train_labels, epochs=30, validation_data=(val_images, val_labels))
+    
+    # model2 = build_model2()
+    # model2.fit(train_images, train_labels, epochs=30, validation_data=(val_images, val_labels))
+    
+    # model3 = build_model3()
+    # model3.fit(train_images, train_labels, epochs=30, validation_data=(val_images, val_labels))
+    
+    #best_model = build_model50k()
+    #best_model.fit(train_images, train_labels, epochs=50, validation_data=(val_images, val_labels))
+    #best_model.save("best_model.h5")
     
 
 
