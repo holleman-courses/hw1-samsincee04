@@ -82,27 +82,27 @@ def build_model3():
 def build_model50k():
     model = keras.Sequential([
         layers.Input(shape=(32, 32, 3)),
-        layers.Conv2D(16, (3, 3), strides=2, padding='same', activation='relu'),
+        
+        # Layer 1: Keep strides at 1 to preserve detail
+        layers.Conv2D(32, (3, 3), padding='same', activation='relu'),
         layers.BatchNormalization(),
-        layers.SeparableConv2D(32, (3, 3), strides=2, padding='same', activation='relu'),
+        layers.MaxPooling2D((2, 2)), # Shrink to 16x16
+        
+        # Layer 2: More filters for feature extraction
+        layers.SeparableConv2D(64, (3, 3), padding='same', activation='relu'),
         layers.BatchNormalization(),
-        layers.SeparableConv2D(64, (3, 3), strides=2, padding='same', activation='relu'),
+        layers.MaxPooling2D((2, 2)), # Shrink to 8x8
+        
+        # Layer 3: Final deep features
+        layers.SeparableConv2D(128, (3, 3), padding='same', activation='relu'),
         layers.BatchNormalization(),
-        layers.SeparableConv2D(64, (3, 3), strides=2, padding='same', activation='relu'),
-        layers.BatchNormalization(),
+        
+        # Global Average Pooling collapses 8x8x128 -> 128
         layers.GlobalAveragePooling2D(),
+        
+        # Final classifier
         layers.Dense(10)
     ])
-   # Dynamic pathing for GitHub Autograder compatibility
-    base_path = os.path.dirname(__file__)
-    weights_path = os.path.join(base_path, "best_model.h5")
-
-    if os.path.exists(weights_path):
-        print(f"DEBUG: Loading weights from {weights_path}")
-        model.load_weights(weights_path)
-    else:
-        print(f"DEBUG: {weights_path} NOT FOUND")
-
     model.compile(
         optimizer='adam',
         loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
@@ -127,9 +127,12 @@ if __name__ == '__main__':
     # model3.fit(train_images, train_labels, epochs=30, validation_data=(val_images, val_labels))
     
     best_model = build_model50k()
-    ##print(best_model.summary())
-    best_model.fit(train_images, train_labels, epochs=10, validation_data=(val_images, val_labels))
-    best_model.save("best_model.h5")
+    #print(best_model.summary())
+    #best_model.fit(train_images, train_labels, epochs=30, validation_data=(val_images, val_labels))
+    #best_model.save("best_model.h5")
+
+    test_loss, test_acc = best_model.evaluate(test_images, test_labels, verbose=2)
+    print(f"Final Test Accuracy: {test_acc}")
 
     
     
