@@ -126,13 +126,13 @@ if __name__ == '__main__':
     # model3 = build_model3()
     # model3.fit(train_images, train_labels, epochs=30, validation_data=(val_images, val_labels))
     
-    best_model = build_model50k()
+    #best_model = build_model50k()
     #print(best_model.summary())
     #best_model.fit(train_images, train_labels, epochs=30, validation_data=(val_images, val_labels))
     #best_model.save("best_model.h5")
 
-    test_loss, test_acc = best_model.evaluate(test_images, test_labels, verbose=2)
-    print(f"Final Test Accuracy: {test_acc}")
+    #test_loss, test_acc = best_model.evaluate(test_images, test_labels, verbose=2)
+    #print(f"Final Test Accuracy: {test_acc}")
 
     
     
