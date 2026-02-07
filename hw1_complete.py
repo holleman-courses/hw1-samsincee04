@@ -126,10 +126,10 @@ if __name__ == '__main__':
     # model3 = build_model3()
     # model3.fit(train_images, train_labels, epochs=30, validation_data=(val_images, val_labels))
     
-    #best_model = build_model50k()
-    #print(best_model.summary())
-    #best_model.fit(train_images, train_labels, epochs=50, validation_data=(val_images, val_labels))
-    #best_model.save("best_model.h5")
+    best_model = build_model50k()
+    ##print(best_model.summary())
+    best_model.fit(train_images, train_labels, epochs=10, validation_data=(val_images, val_labels))
+    best_model.save("best_model.h5", save_format="h5")
 
     
     
